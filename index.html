@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ranjith N - AI & Multi-Agent Systems Engineer Portfolio. Specializing in LangGraph, RAG, and Full-Stack AI delivery.">
+  <meta name="description" content="Portfolio of Ranjith N - AI & Multi-Agent Systems Engineer specializing in LangGraph, RAG, and Full-Stack AI delivery.">
   <title>RANJITH N | AI & Multi-Agent Systems Engineer</title>
 
-  <!-- Google Fonts & Font Awesome Icons -->
+  <!-- Google Fonts: Playfair Display (Huge Serif) & Inter (Clean Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- 3D Model Viewer Component -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -23,161 +22,166 @@
   <!-- Navigation -->
   <header>
     <div class="container navbar">
-      <a href="#" class="brand-logo" id="brand-logo">RANJITH N</a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation">
+      <a href="#hero" class="brand-logo" id="brand-logo">RANJITH N<span>.</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#work" class="nav-link">Work</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#education" class="nav-link">Education & Credentials</a></li>
+        <li><a href="#credits" class="nav-link">Credits</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section" id="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-content">
-            <div class="badge">
-              <span class="pulse-dot"></span>
-              <span id="availability-text">Open to AI / LLM Engineering roles</span>
-            </div>
-            <h1 class="hero-title">
-              Hi, I'm <span class="gradient-text" id="hero-name">RANJITH N</span>
-            </h1>
-            <h2 class="hero-subtitle" id="hero-role">AI & Multi-Agent Systems Engineer</h2>
-            <p class="hero-description" id="hero-tagline">
-              Building agentic, multi-agent AI systems with LangGraph, Retrieval-Augmented Generation (RAG), vector embeddings, and human-in-the-loop LLM orchestration.
-            </p>
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary">
-                View Projects <i class="fas fa-arrow-right"></i>
-              </a>
-              <a href="assets/Ranjith_N_Resume.pdf" target="_blank" class="btn btn-secondary" id="resume-btn">
-                <i class="fas fa-file-pdf"></i> Download Resume
-              </a>
-            </div>
-            <div class="social-bar" id="social-links">
-              <!-- Dynamically populated from data.js -->
-            </div>
-          </div>
-
-          <!-- Hero Visual / 3D Model or Cutout -->
-          <div class="hero-visual">
-            <div class="visual-wrapper">
-              <div class="visual-glow"></div>
-              <div id="visual-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                <!-- 3D model-viewer or fallback image rendered via main.js -->
-              </div>
-            </div>
-          </div>
+  <!-- 1. HERO SECTION -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Centre-Left Visual with Soft Crimson Smoke/Glow -->
+        <div class="hero-visual-container">
+          <div class="hero-glow-smoke"></div>
+          <picture class="hero-picture">
+            <source media="(max-width: 768px)" srcset="assets/hero-mobile-4x5.png">
+            <img src="assets/me-sunglasses-cutout.png" alt="Ranjith N" class="hero-visual-img" id="hero-img">
+          </picture>
         </div>
-      </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Summary</div>
-          <h2 class="section-title">About Me</h2>
-        </div>
-        <div class="about-card">
-          <div class="about-headline" id="about-headline"></div>
-          <div class="about-body" id="about-body"></div>
-          <div class="stats-grid" id="about-stats">
+        <!-- Right Side: Name and Rotating Role Text -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span id="availability-text">Open to AI / LLM Engineering roles</span>
+          </div>
+          <h1 class="hero-name huge-serif" id="hero-name">RANJITH N</h1>
+          <div class="hero-role-wrapper">
+            <span class="hero-role-rotating" id="hero-role-text">AI & Multi-Agent Systems Engineer</span>
+          </div>
+          <p class="hero-tagline" id="hero-tagline">
+            Building agentic, multi-agent AI systems with LangGraph, Retrieval-Augmented Generation (RAG), vector embeddings, and human-in-the-loop LLM orchestration.
+          </p>
+          <div class="hero-actions">
+            <a href="#work" class="btn btn-crimson">
+              Explore Work <i class="fas fa-arrow-down"></i>
+            </a>
+            <a href="assets/Ranjith_N_Resume.pdf" target="_blank" class="btn btn-outline" id="resume-btn">
+              <i class="fas fa-file-pdf"></i> Resume
+            </a>
+          </div>
+          <div class="hero-socials" id="hero-socials">
             <!-- Dynamically populated from data.js -->
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Expertise</div>
-          <h2 class="section-title">Technical Skills & Tools</h2>
-        </div>
-        <div class="skills-grid" id="skills-container">
+  <!-- 2. ABOUT SECTION -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">01 / Summary</div>
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="about-card">
+        <div class="about-headline" id="about-headline"></div>
+        <div class="about-paragraphs" id="about-body"></div>
+        <div class="about-stats-grid" id="about-stats">
           <!-- Dynamically populated from data.js -->
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Portfolio Work</div>
-          <h2 class="section-title">Featured AI Projects</h2>
-        </div>
-        <div class="projects-grid" id="projects-container">
-          <!-- Dynamically populated from data.js -->
-        </div>
+  <!-- 3. WORK SECTION -->
+  <section id="work">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">02 / Portfolio</div>
+        <h2 class="section-title">Work</h2>
       </div>
-    </section>
+      <div class="work-grid" id="work-container">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
 
-    <!-- Education & Credentials Section -->
-    <section id="education">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Background</div>
-          <h2 class="section-title">Education & Credentials</h2>
-        </div>
-        <div class="credentials-wrapper">
-          <!-- Education Column -->
-          <div class="credential-block">
-            <h3 class="credential-block-title">
-              <i class="fas fa-graduation-cap"></i> Education
-            </h3>
-            <div class="education-timeline" id="education-timeline">
-              <!-- Dynamically populated from data.js -->
-            </div>
+  <!-- 4. SKILLS SECTION -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">03 / Expertise</div>
+        <h2 class="section-title">Skills</h2>
+      </div>
+      <div class="skills-grid" id="skills-container">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CREDITS SECTION -->
+  <section id="credits">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">04 / Background</div>
+        <h2 class="section-title">Credits</h2>
+      </div>
+      <div class="credits-grid">
+        <!-- Education Column -->
+        <div class="credit-box">
+          <h3 class="credit-box-title">
+            <i class="fas fa-graduation-cap"></i> Education
+          </h3>
+          <div class="education-timeline" id="education-timeline">
+            <!-- Dynamically populated from data.js -->
           </div>
+        </div>
 
-          <!-- Certifications & Achievements Column -->
-          <div class="credential-block">
-            <h3 class="credential-block-title">
-              <i class="fas fa-award"></i> Certifications & Honors
-            </h3>
-            <div class="cred-items-list" id="credentials-list">
-              <!-- Dynamically populated from data.js -->
-            </div>
+        <!-- Certifications & Achievements Column -->
+        <div class="credit-box">
+          <h3 class="credit-box-title">
+            <i class="fas fa-award"></i> Certifications & Honors
+          </h3>
+          <div class="cred-list" id="credits-list">
+            <!-- Dynamically populated from data.js -->
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Get In Touch</div>
-          <h2 class="section-title" id="contact-heading">Let's Connect</h2>
-          <p id="contact-subheading" style="color: var(--text-secondary); margin-top: 0.5rem;"></p>
-        </div>
-        <div class="contact-grid" id="contact-grid">
-          <!-- Dynamically populated from data.js -->
-        </div>
+  <!-- 6. CONTACT SECTION -->
+  <section id="contact">
+    <div class="container contact-container">
+      <div class="section-header center">
+        <div class="section-tag">05 / Reach Out</div>
+        <h2 class="section-title" id="contact-heading">Contact</h2>
+        <p id="contact-subheading" style="color: var(--stone); margin-top: 0.75rem; font-size: 1.05rem;"></p>
       </div>
-    </section>
-  </main>
+      <div class="contact-grid" id="contact-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer -->
+  <!-- 7. FOOTER SECTION -->
   <footer>
     <div class="container">
-      <p>&copy; <span id="footer-year">2026</span> <span id="footer-name">RANJITH N</span>. All rights reserved.</p>
+      <div class="footer-content">
+        <div>
+          <div class="footer-brand" id="footer-brand">RANJITH N<span>.</span></div>
+          <div class="footer-tagline" id="footer-tagline">AI & Multi-Agent Systems Engineer</div>
+        </div>
+        <div class="footer-copy" id="footer-copyright">
+          © 2026 RANJITH N. All rights reserved.
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Portfolio Data & Application Scripts -->
+  <!-- Scripts -->
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

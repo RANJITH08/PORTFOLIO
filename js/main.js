@@ -1,7 +1,14 @@
 /**
  * ====================================================================
- * MAIN APPLICATION LOGIC
- * Reads config from data.js and dynamically populates the portfolio DOM.
+ * PORTFOLIO APPLICATION LOGIC
+ * Dynamic data rendering for all 7 sections from js/data.js:
+ * 1. Hero (with rotating role text)
+ * 2. About
+ * 3. Work
+ * 4. Skills
+ * 5. Credits
+ * 6. Contact
+ * 7. Footer
  * ====================================================================
  */
 
@@ -11,108 +18,84 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  initPersonalData(portfolioData.personal, portfolioData.assets);
-  initSocialLinks(portfolioData.socialLinks);
+  // Initialize the 7 Sections
+  initHero(portfolioData.personal, portfolioData.socialLinks);
   initAbout(portfolioData.about);
+  initWork(portfolioData.work);
   initSkills(portfolioData.skills);
-  initProjects(portfolioData.projects);
-  initEducationAndCredentials(portfolioData.education, portfolioData.certifications, portfolioData.achievements);
+  initCredits(portfolioData.credits);
   initContact(portfolioData.contact);
+  initFooter(portfolioData.footer, portfolioData.personal);
   initNavigation();
-  initVisualAsset(portfolioData.assets);
-  initFooter(portfolioData.personal);
 });
 
-/* Personal & Hero Section */
-function initPersonalData(personal, assets) {
+/* ====================================================================
+   1. HERO SECTION (Prompt 2: Rotating Role Text & Dynamic Content)
+   ==================================================================== */
+function initHero(personal, socials) {
   if (!personal) return;
 
   // Title and Brand
-  document.title = `${personal.name} | ${personal.role}`;
+  document.title = `${personal.name} | Portfolio`;
   const brandLogo = document.getElementById("brand-logo");
-  if (brandLogo) brandLogo.textContent = personal.name;
+  if (brandLogo) brandLogo.innerHTML = `${personal.name}<span>.</span>`;
 
-  // Hero details
+  // Hero Name
   const heroName = document.getElementById("hero-name");
   if (heroName) heroName.textContent = personal.name;
 
-  const heroRole = document.getElementById("hero-role");
-  if (heroRole) heroRole.textContent = personal.role;
-
+  // Hero Tagline
   const heroTagline = document.getElementById("hero-tagline");
   if (heroTagline) heroTagline.textContent = personal.tagline || personal.bio;
 
+  // Availability Badge
   const availabilityText = document.getElementById("availability-text");
   if (availabilityText && personal.availability) {
     availabilityText.textContent = personal.availability;
   }
 
-  // Resume button
+  // Resume Download Button
   const resumeBtn = document.getElementById("resume-btn");
   if (resumeBtn && personal.resumeUrl) {
     resumeBtn.href = personal.resumeUrl;
     resumeBtn.setAttribute("target", "_blank");
   }
-}
 
-/* 3D Model / Image visualizer */
-function initVisualAsset(assets) {
-  const container = document.getElementById("visual-container");
-  if (!container || !assets) return;
+  // Rotating Role Text
+  initRotatingRole(personal.roles);
 
-  container.innerHTML = "";
-
-  if (assets.enable3D && assets.model3d) {
-    const modelViewer = document.createElement("model-viewer");
-    modelViewer.setAttribute("src", assets.model3d);
-    modelViewer.setAttribute("alt", "3D Avatar");
-    modelViewer.setAttribute("auto-rotate", "");
-    modelViewer.setAttribute("camera-controls", "");
-    modelViewer.setAttribute("shadow-intensity", "1");
-    modelViewer.setAttribute("loading", "lazy");
-    modelViewer.className = "avatar-viewer";
-
-    // Graceful fallback to cutout image if 3D model fails or has no mesh
-    modelViewer.addEventListener("error", () => {
-      console.warn("3D model failed to render, falling back to 2D cutout image.");
-      renderFallbackImage(container, assets);
-    });
-
-    container.appendChild(modelViewer);
-  } else {
-    renderFallbackImage(container, assets);
+  // Social Links Bar
+  const socialsContainer = document.getElementById("hero-socials");
+  if (socialsContainer && Array.isArray(socials)) {
+    socialsContainer.innerHTML = socials
+      .map(
+        (s) => `
+          <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="${s.platform}">
+            <i class="${s.icon}"></i>
+          </a>
+        `
+      )
+      .join("");
   }
 }
 
-function renderFallbackImage(container, assets) {
-  container.innerHTML = "";
-  const img = document.createElement("img");
-  img.src = assets.cutoutImage || assets.heroImage;
-  img.alt = "Portrait";
-  img.className = "avatar-cutout";
-  img.onerror = () => {
-    img.src = assets.heroImage;
-  };
-  container.appendChild(img);
+function initRotatingRole(roles) {
+  const roleEl = document.getElementById("hero-role-text");
+  if (!roleEl || !Array.isArray(roles) || roles.length === 0) return;
+
+  let currentIndex = 0;
+  roleEl.textContent = roles[0];
+
+  // Rotate role text at a steady interval
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % roles.length;
+    roleEl.textContent = roles[currentIndex];
+  }, 2800);
 }
 
-/* Social Links */
-function initSocialLinks(links) {
-  const container = document.getElementById("social-links");
-  if (!container || !Array.isArray(links)) return;
-
-  container.innerHTML = links
-    .map(
-      (link) => `
-        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="${link.platform}">
-          <i class="${link.icon}"></i>
-        </a>
-      `
-    )
-    .join("");
-}
-
-/* About Section */
+/* ====================================================================
+   2. ABOUT SECTION
+   ==================================================================== */
 function initAbout(about) {
   if (!about) return;
 
@@ -139,7 +122,45 @@ function initAbout(about) {
   }
 }
 
-/* Skills Section */
+/* ====================================================================
+   3. WORK SECTION
+   ==================================================================== */
+function initWork(work) {
+  const container = document.getElementById("work-container");
+  if (!container || !Array.isArray(work)) return;
+
+  container.innerHTML = work
+    .map(
+      (item) => `
+        <div class="work-card">
+          <div>
+            ${item.type ? `<div class="work-type">${item.type}</div>` : ""}
+            <h3 class="work-title">${item.title}</h3>
+            <p class="work-description">${item.description}</p>
+            ${
+              Array.isArray(item.points) && item.points.length > 0
+                ? `<ul class="work-bullets">
+                    ${item.points.map((pt) => `<li>${pt}</li>`).join("")}
+                  </ul>`
+                : ""
+            }
+            <div class="work-tags">
+              ${(item.tags || []).map((tag) => `<span class="work-tag">${tag}</span>`).join("")}
+            </div>
+          </div>
+          <div class="work-links">
+            ${item.liveUrl ? `<a href="${item.liveUrl}" class="work-link" target="_blank" rel="noopener">Live Demo <i class="fas fa-external-link-alt"></i></a>` : ""}
+            ${item.githubUrl ? `<a href="${item.githubUrl}" class="work-link" target="_blank" rel="noopener">GitHub <i class="fab fa-github"></i></a>` : ""}
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+/* ====================================================================
+   4. SKILLS SECTION
+   ==================================================================== */
 function initSkills(skills) {
   const container = document.getElementById("skills-container");
   if (!container || !Array.isArray(skills)) return;
@@ -159,10 +180,10 @@ function initSkills(skills) {
       return `
         <div class="skill-card">
           <h3 class="skill-category">
-            <i class="fas ${icon}" style="color: var(--accent-primary);"></i>
+            <i class="fas ${icon}"></i>
             ${grp.category}
           </h3>
-          <div class="skill-badges">
+          <div class="skill-items">
             ${grp.items.map((item) => `<span class="skill-pill">${item}</span>`).join("")}
           </div>
         </div>
@@ -171,50 +192,20 @@ function initSkills(skills) {
     .join("");
 }
 
-/* Projects Section */
-function initProjects(projects) {
-  const container = document.getElementById("projects-container");
-  if (!container || !Array.isArray(projects)) return;
+/* ====================================================================
+   5. CREDITS SECTION (Education, Certifications & Achievements)
+   ==================================================================== */
+function initCredits(credits) {
+  if (!credits) return;
 
-  container.innerHTML = projects
-    .map(
-      (proj) => `
-        <div class="project-card">
-          <div>
-            ${proj.type ? `<span class="project-badge">${proj.type}</span>` : ""}
-            <h3 class="project-title">${proj.title}</h3>
-            <p class="project-description">${proj.description}</p>
-            ${
-              Array.isArray(proj.points) && proj.points.length > 0
-                ? `<ul class="project-bullets">
-                    ${proj.points.map((pt) => `<li>${pt}</li>`).join("")}
-                  </ul>`
-                : ""
-            }
-            <div class="project-tags">
-              ${(proj.tags || []).map((t) => `<span class="tag">${t}</span>`).join("")}
-            </div>
-          </div>
-          <div class="project-links">
-            ${proj.liveUrl ? `<a href="${proj.liveUrl}" class="project-link" target="_blank" rel="noopener">Live Demo <i class="fas fa-external-link-alt"></i></a>` : ""}
-            ${proj.githubUrl ? `<a href="${proj.githubUrl}" class="project-link" target="_blank" rel="noopener">GitHub <i class="fab fa-github"></i></a>` : ""}
-          </div>
-        </div>
-      `
-    )
-    .join("");
-}
-
-/* Education, Certifications & Achievements */
-function initEducationAndCredentials(education, certs, achievements) {
   // Render Education
   const eduContainer = document.getElementById("education-timeline");
-  if (eduContainer && Array.isArray(education)) {
-    eduContainer.innerHTML = education
+  if (eduContainer && Array.isArray(credits.education)) {
+    eduContainer.innerHTML = credits.education
       .map(
         (edu) => `
-          <div class="education-item">
-            <h3 class="edu-degree">${edu.degree}</h3>
+          <div class="edu-item">
+            <h4 class="edu-degree">${edu.degree}</h4>
             <div class="edu-school">${edu.institution}</div>
             <div class="edu-period"><i class="far fa-calendar-alt"></i> ${edu.period}</div>
             ${edu.details ? `<p class="edu-details">${edu.details}</p>` : ""}
@@ -224,34 +215,34 @@ function initEducationAndCredentials(education, certs, achievements) {
       .join("");
   }
 
-  // Render Certifications & Achievements
-  const credsContainer = document.getElementById("credentials-list");
+  // Render Certifications & Achievements List
+  const credsContainer = document.getElementById("credits-list");
   if (credsContainer) {
     let html = "";
 
-    if (Array.isArray(certs) && certs.length > 0) {
-      certs.forEach((cert) => {
+    if (Array.isArray(credits.certifications)) {
+      credits.certifications.forEach((c) => {
         html += `
           <div class="cred-card">
-            <i class="${cert.icon || 'fas fa-certificate'} cred-icon"></i>
+            <i class="${c.icon || 'fas fa-certificate'} cred-icon"></i>
             <div class="cred-info">
-              <h4>${cert.name}</h4>
-              <p>${cert.issuer}</p>
-              ${cert.date ? `<div class="cred-date">${cert.date}</div>` : ""}
+              <h4>${c.name}</h4>
+              <p>${c.issuer}</p>
+              ${c.date ? `<div class="cred-date">${c.date}</div>` : ""}
             </div>
           </div>
         `;
       });
     }
 
-    if (Array.isArray(achievements) && achievements.length > 0) {
-      achievements.forEach((ach) => {
+    if (Array.isArray(credits.achievements)) {
+      credits.achievements.forEach((a) => {
         html += `
           <div class="cred-card">
-            <i class="${ach.icon || 'fas fa-trophy'} cred-icon" style="color: #f59e0b;"></i>
+            <i class="${a.icon || 'fas fa-trophy'} cred-icon" style="color: var(--crimson);"></i>
             <div class="cred-info">
-              <h4>${ach.title}</h4>
-              <p>${ach.description}</p>
+              <h4>${a.title}</h4>
+              <p>${a.description}</p>
             </div>
           </div>
         `;
@@ -262,7 +253,9 @@ function initEducationAndCredentials(education, certs, achievements) {
   }
 }
 
-/* Contact Section */
+/* ====================================================================
+   6. CONTACT SECTION
+   ==================================================================== */
 function initContact(contact) {
   if (!contact) return;
 
@@ -275,31 +268,47 @@ function initContact(contact) {
   const gridEl = document.getElementById("contact-grid");
   if (gridEl) {
     gridEl.innerHTML = `
-      <a href="mailto:${contact.email}" class="contact-card-item">
+      <a href="mailto:${contact.email}" class="contact-card">
         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
         <div class="contact-label">Email</div>
-        <div class="contact-val">${contact.email}</div>
+        <div class="contact-value">${contact.email}</div>
       </a>
-      <a href="tel:${contact.phone}" class="contact-card-item">
+      <a href="tel:${contact.phone}" class="contact-card">
         <div class="contact-icon"><i class="fas fa-phone"></i></div>
         <div class="contact-label">Phone</div>
-        <div class="contact-val">${contact.phone}</div>
+        <div class="contact-value">${contact.phone}</div>
       </a>
-      <div class="contact-card-item">
+      <div class="contact-card">
         <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
         <div class="contact-label">Location</div>
-        <div class="contact-val">${contact.location}</div>
+        <div class="contact-value">${contact.location}</div>
       </div>
-      <a href="https://github.com/RANJITH08" target="_blank" rel="noopener" class="contact-card-item">
+      <a href="${contact.githubUrl || 'https://github.com/RANJITH08'}" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-icon"><i class="fab fa-github"></i></div>
         <div class="contact-label">GitHub</div>
-        <div class="contact-val">@RANJITH08</div>
+        <div class="contact-value">@RANJITH08</div>
       </a>
     `;
   }
 }
 
-/* Navigation & Mobile Drawer */
+/* ====================================================================
+   7. FOOTER SECTION
+   ==================================================================== */
+function initFooter(footer, personal) {
+  const brandEl = document.getElementById("footer-brand");
+  if (brandEl && personal) brandEl.innerHTML = `${personal.name}<span>.</span>`;
+
+  const tagEl = document.getElementById("footer-tagline");
+  if (tagEl && footer && footer.tagline) tagEl.textContent = footer.tagline;
+
+  const copyEl = document.getElementById("footer-copyright");
+  if (copyEl && footer && footer.copyright) {
+    copyEl.textContent = `© ${new Date().getFullYear()} ${footer.copyright}`;
+  }
+}
+
+/* Mobile Navigation Toggle */
 function initNavigation() {
   const toggleBtn = document.getElementById("nav-toggle");
   const navLinks = document.getElementById("nav-links");
@@ -315,13 +324,4 @@ function initNavigation() {
       });
     });
   }
-}
-
-/* Footer Section */
-function initFooter(personal) {
-  const yearEl = document.getElementById("footer-year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  const nameEl = document.getElementById("footer-name");
-  if (nameEl && personal) nameEl.textContent = personal.name;
 }
