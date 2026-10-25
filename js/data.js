@@ -1,230 +1,157 @@
 /**
  * ====================================================================
  * PORTFOLIO DATA CONFIGURATION
- * All editable content for the 7 sections lives in this file!
- * (Hero, About, Work, Skills, Credits, Contact, Footer)
+ * All editable content lives here. Factual and accurate.
  * ====================================================================
  */
 
-const portfolioData = {
-  // 1. Hero & Personal Details
+export const portfolioData = {
+  // Personal Info
   personal: {
-    name: "RANJITH N",
-    roles: [
-      "AI & Multi-Agent Systems Engineer",
-      "Agentic RAG Specialist",
-      "LangGraph & LLM Orchestrator",
-      "Full-Stack AI Developer"
-    ],
-    tagline: "Building agentic, multi-agent AI systems with LangGraph, Retrieval-Augmented Generation (RAG), vector embeddings, and human-in-the-loop LLM orchestration.",
-    bio: "Computer Science graduate (B.Sc, Data Analytics) skilled in prompt engineering, structured output validation, REST API design, and full-stack delivery.",
-    location: "Tirupur, Tamil Nadu, India",
-    phone: "+91 7604960261",
+    name: "Ranjith N",
+    location: "Tamil Nadu, India",
     email: "ranjith.n.work@gmail.com",
-    availability: "Open to AI / LLM Engineering roles",
-    resumeUrl: "assets/Ranjith_N_Resume.pdf"
+    linkedin: "[TODO]",
+    github: "[TODO]",
+    roles: ["AI Engineer", "Data Analyst", "Builder"],
+    tagline: "Engineering intelligent agent systems, real-time RAG pipelines, and high-performance digital tools.",
+    status: "Available for AI Engineering & Product Roles"
   },
 
-  // Hero & Media Assets
+  // Assets Reference (Strictly Relative Paths)
   assets: {
     heroCutout: "assets/me-sunglasses-cutout.png",
+    heroThemed: "assets/me-cutout-themed.png",
+    heroWideThemed: "assets/hero-wide-themed.png",
     heroMobile: "assets/hero-mobile-4x5.png",
+    model3d: "assets/me.glb",
     resumePdf: "assets/Ranjith_N_Resume.pdf"
   },
 
-  // Social Links
-  socialLinks: [
-    { platform: "GitHub", icon: "fab fa-github", url: "https://github.com/RANJITH08" },
-    { platform: "LinkedIn", icon: "fab fa-linkedin-in", url: "https://linkedin.com" },
-    { platform: "Email", icon: "fas fa-envelope", url: "mailto:ranjith.n.work@gmail.com" },
-    { platform: "Phone", icon: "fas fa-phone", url: "tel:+917604960261" }
-  ],
+  // Intro Screen (Studio / Film-Set Metaphor: "Rolling")
+  intro: {
+    label: "ROLLING",
+    title: "RANJITH N · PORTFOLIO 2026",
+    timecode: "00:00:02:18",
+    skipHint: "Click or press any key to skip"
+  },
 
-  // 2. About Section
+  // About Section (Darkroom Develop Theme)
   about: {
+    sectionTag: "ACT I · THE PROFILE",
     title: "About",
-    headline: "Architecting Agentic Systems & Production RAG Pipelines",
-    paragraphs: [
-      "I am a Computer Science graduate (B.Sc, Data Analytics) specialized in designing and building production-ready agentic AI systems using LangGraph, LangChain, and advanced RAG workflows.",
-      "My work focuses on multi-step agent reasoning, human-in-the-loop validation, vector embeddings (FAISS, Sentence-Transformers), and high-performance REST APIs (FastAPI) to deliver scalable, reliable full-stack AI applications."
-    ],
+    bio: "B.Sc Computer Science with Data Analytics, KPR College of Arts, Science and Research (2023-2026). Learns by building real projects; goal is AI product engineering.",
     stats: [
-      { label: "Featured AI Projects", value: "5" },
-      { label: "AI & LLM Skills", value: "15+" },
-      { label: "B.Sc Data Analytics", value: "2023-26" }
+      { label: "Degree Path", value: "2023–2026" },
+      { label: "Specialization", value: "B.Sc Data Analytics" },
+      { label: "Primary Objective", value: "AI Product Engineering" }
     ]
   },
 
-  // 3. Work Section (Featured Projects)
-  work: [
+  // Work Section (Contact-Sheet Grid of 3 Projects)
+  projects: [
     {
-      title: "AI Recruiting Pipeline Assistant",
-      type: "Personal Project",
-      description: "Agentic, multi-agent recruiting pipeline on LangGraph's StateGraph with typed Pydantic schemas, RAG-grounded scoring, and a hard human-in-the-loop approval gate.",
-      points: [
-        "Built an agentic, multi-agent recruiting pipeline (Resume Parser, JD-Match, Bias Checker, Interview Question Generator, Ranking) on LangGraph's StateGraph with typed Pydantic schemas, RAG-grounded scoring (FAISS + sentence-transformers), and a hard human-in-the-loop approval gate.",
-        "Shipped a FastAPI backend (Groq LLM, pdfplumber PDF ingestion) + React/TypeScript dashboard end-to-end."
-      ],
-      tags: ["Python", "LangGraph", "LangChain", "FAISS", "Sentence-Transformers", "Groq API", "FastAPI", "Pydantic", "React", "TypeScript"],
-      githubUrl: "https://github.com/RANJITH08",
-      liveUrl: ""
+      id: "project-1",
+      number: "01",
+      title: "Jarvis-style AI Assistant",
+      summary: "Multi-provider LLM router with fallback, tool-calling, RAG, verifier and voice.",
+      description: "An autonomous desktop AI assistant featuring an intelligent LLM routing mechanism across OpenAI and Groq with automatic fallback, multi-step tool execution, retrieval-augmented generation (RAG) over local context, output verification, and bidirectional voice interaction.",
+      tags: ["Python", "LLM Router", "Tool-Calling", "RAG", "Voice"],
+      liveUrl: "[TODO]",
+      githubUrl: "[TODO]",
+      image: "assets/hero-wide-themed.png"
     },
     {
-      title: "Agentic RAG — Multi-Step Reasoning Document Q&A System",
-      type: "Personal Project",
-      description: "Self-evaluating agentic retrieval architecture with automated query reformulation to prevent hallucinations.",
-      points: [
-        "Built an agentic RAG system where an LLM-driven agent decides when retrieval is needed, self-checks retrieved chunks for relevance, and reformulates the query on failure (up to 3 attempts) before answering — reducing hallucination by declining out-of-scope questions instead of guessing.",
-        "Shipped a full-stack app: FastAPI backend (/chat, /upload, /health) with dynamic PDF ingestion (incremental FAISS updates), paired with a React + Vite UI showing a live, expandable reasoning trace per response."
-      ],
-      tags: ["Python", "LangChain", "Tool-Calling Agents", "Groq API (gpt-oss-120b)", "FAISS", "Sentence-Transformers", "FastAPI", "React", "Vite"],
-      githubUrl: "https://github.com/RANJITH08",
-      liveUrl: ""
+      id: "project-2",
+      number: "02",
+      title: "PromptShield",
+      summary: "Local-first floating prompt optimizer desktop app (Tauri, Rust, React).",
+      description: "A lightweight, privacy-focused floating desktop overlay designed to refine, analyze, and enhance system prompts in real time with low latency before submission to LLMs.",
+      tags: ["Tauri", "Rust", "React", "Desktop", "Prompt Engineering"],
+      liveUrl: "[TODO]",
+      githubUrl: "[TODO]",
+      image: "assets/hero-wide-themed.png"
     },
     {
-      title: "LLM-Powered RAG System — PDF Document Q&A",
-      type: "Personal Project",
-      description: "Natural-language document interrogation pipeline leveraging FAISS semantic retrieval and Groq LLM grounded synthesis.",
-      points: [
-        "Built a RAG pipeline (PDF_RAG_FAISS_GROQ) for natural-language Q&A over PDFs using FAISS semantic retrieval + Groq LLM grounded generation.",
-        "Documented architecture and published on GitHub and LinkedIn."
-      ],
-      tags: ["Python", "LangChain", "FAISS", "Vector Embeddings", "Semantic Search", "Groq API"],
-      githubUrl: "https://github.com/RANJITH08",
-      liveUrl: ""
-    },
-    {
-      title: "Autonomous AI Research Agent",
-      type: "Personal Project",
-      description: "Autonomous reasoning agent utilizing tool calling to generate comprehensive academic-style research reports.",
-      points: [
-        "Built a LangChain ReAct agent that reasons over a query, dynamically selects tools (Wikipedia API, DuckDuckGo), and auto-generates structured academic-style research reports end-to-end."
-      ],
-      tags: ["Python", "LangChain (ReAct)", "Groq LLM", "Agentic AI", "Tool Use", "Prompt Engineering"],
-      githubUrl: "https://github.com/RANJITH08",
-      liveUrl: ""
-    },
-    {
-      title: "Conversational AI Assistant — Gemini API",
-      type: "Personal Project",
-      description: "Context-aware conversational interface with prompt engineering for consistent multi-turn dialogues.",
-      points: [
-        "Built a context-aware conversational app using Gemini 1.5 Flash API with prompt engineering for consistent multi-turn responses."
-      ],
-      tags: ["Python", "Gemini 1.5 Flash", "LLM APIs", "Prompt Engineering", "Conversational AI"],
-      githubUrl: "https://github.com/RANJITH08",
-      liveUrl: ""
+      id: "project-3",
+      number: "03",
+      title: "Client Portal",
+      summary: "Login, unique user IDs and secure folder redirects for a client.",
+      description: "A production client management portal implementing robust authentication, unique customer ID hashing, and dynamic secure folder redirects for file deliveries.",
+      tags: ["Authentication", "Security", "Folder Redirects", "Full-Stack"],
+      liveUrl: "[TODO]",
+      githubUrl: "[TODO]",
+      image: "assets/hero-wide-themed.png"
     }
   ],
 
-  // 4. Skills Section
+  // Skills Section (Infinite Marquee of Tools)
   skills: [
-    {
-      category: "AI & LLM Engineering",
-      items: [
-        "LangChain",
-        "LangGraph",
-        "Agentic AI",
-        "Multi-Agent Systems",
-        "AI Agents (ReAct)",
-        "Retrieval-Augmented Generation (RAG)",
-        "Vector Databases (FAISS)",
-        "Vector Embeddings",
-        "Semantic Search",
-        "Sentence-Transformers",
-        "Human-in-the-Loop (HITL) Design",
-        "LLM Orchestration",
-        "LLM APIs (Groq, Gemini)",
-        "Prompt Engineering",
-        "Structured Output Validation",
-        "Model Evaluation"
-      ]
-    },
-    {
-      category: "Languages",
-      items: ["Python", "JavaScript", "TypeScript", "SQL", "C", "C++", "HTML/CSS"]
-    },
-    {
-      category: "Frameworks & Tools",
-      items: ["FastAPI", "React", "TypeScript", "Vite", "PostgreSQL", "MySQL", "Git", "GitHub", "Figma", "Render.com"]
-    },
-    {
-      category: "Core Concepts",
-      items: ["REST API Development", "Data Analytics", "Agentic Workflows", "System Design"]
-    },
-    {
-      category: "Soft Skills",
-      items: ["Communication", "Team Collaboration", "Leadership", "Problem Solving", "Adaptability", "Quick Learner", "Enthusiasm"]
-    },
-    {
-      category: "Areas of Interest",
-      items: ["Game Development", "Animation", "Autonomous Agents", "Interactive 3D"]
-    }
+    "Python",
+    "SQL",
+    "Data Analytics",
+    "Prompt Engineering",
+    "LLM apps",
+    "RAG",
+    "React",
+    "Rust",
+    "Tauri",
+    "Git"
   ],
 
-  // 5. Credits Section (Education, Certifications, Achievements)
+  // Credits Section (Rolling End Credits)
   credits: {
-    education: [
+    sectionTag: "ACT IV · CREDITS",
+    title: "Credits",
+    achievements: [
       {
-        degree: "Bachelor of Science, Computer Science with Data Analytics",
-        institution: "KPR College of Arts, Science and Research",
-        period: "2023 – 2026",
-        details: "Focus on Data Analytics, Machine Learning fundamentals, data structures, and vector architectures."
+        title: "Asian Book of Records",
+        category: "Record Holder",
+        description: "Officially documented record in the Asian Book of Records."
       },
       {
-        degree: "HSC — Computer Application & Accounting",
-        institution: "Saradha Vidhyalaya Mat. Hr. Sec. School",
-        period: "2022 – 2023",
-        details: "Higher secondary education focusing on computer applications, programming concepts, and computational foundations."
+        title: "District ThrowBall Winner (Captain)",
+        category: "Leadership & Athletics",
+        description: "Captained the district sports team to championship victory."
       }
     ],
     certifications: [
       {
-        name: "Prompt Engineering for Developers",
+        title: "Prompt Engineering for Developers",
         issuer: "DeepLearning.AI",
-        date: "Certified",
-        icon: "fas fa-certificate"
+        date: "Certified"
       },
       {
-        name: "Data Analytics Job Simulation",
+        title: "Data Analytics Job Simulation",
         issuer: "Deloitte (via Forage)",
-        date: "April 2026",
-        icon: "fas fa-chart-line"
-      }
-    ],
-    achievements: [
-      {
-        title: "Asian Book of Records",
-        description: "Official record holder documented in the prestigious Asian Book of Records.",
-        icon: "fas fa-trophy"
-      },
-      {
-        title: "District ThrowBall Winner (Captain)",
-        description: "Led the district team as Captain to championship victory.",
-        icon: "fas fa-medal"
+        date: "April 2026"
       }
     ]
   },
 
-  // 6. Contact Section
+  // Contact Section ("ON AIR" Studio Metaphor)
   contact: {
-    heading: "Let's Connect",
-    subheading: "Interested in collaborating on AI agents, RAG systems, or full-stack software? Reach out directly.",
+    sectionTag: "FINAL ACT · TRANSMISSION",
+    title: "Contact",
+    badge: "ON AIR",
+    headline: "Let's build something remarkable.",
     email: "ranjith.n.work@gmail.com",
-    phone: "+91 7604960261",
-    location: "Tirupur, Tamil Nadu, India",
-    githubUrl: "https://github.com/RANJITH08"
+    linkedin: "[TODO]",
+    github: "[TODO]",
+    location: "Tamil Nadu, India"
   },
 
-  // 7. Footer
+  // Footer ("That's a wrap")
   footer: {
-    brand: "RANJITH N",
-    tagline: "AI & Multi-Agent Systems Engineer",
-    copyright: "2026 RANJITH N. All rights reserved."
+    wrapText: "THAT'S A WRAP",
+    copyright: "2026 RANJITH N. ALL RIGHTS RESERVED.",
+    locationNote: "TAMIL NADU, INDIA"
   }
 };
 
-// Export for module or standard script usage
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = portfolioData;
+// Also attach to window for global script accessibility if needed
+if (typeof window !== "undefined") {
+  window.portfolioData = portfolioData;
 }
+
+export default portfolioData;

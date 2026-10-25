@@ -1,45 +1,42 @@
 /* ====================================================================
-   PORTFOLIO STYLESHEET
-   Theme Variables:
-     - navy: #1B1E4A
-     - stone: #AFAEA2
-     - crimson: #D21319 (accent only)
-   Typography:
-     - Huge serif headings
-     - Clean sans body
+   DESIGN SYSTEM (Strict Theme Variables & Metaphor)
+   --navy: #1B1E4A (main background)
+   --navy-deep: #11132F (sections, depth)
+   --stone: #AFAEA2 (text, borders, panels)
+   --crimson: #D21319 (ACCENT ONLY: headline highlights, buttons, hover, glow, ribbons; ~10%)
    ==================================================================== */
 
 :root {
-  /* Core Theme Colors */
+  /* Strict Palette */
   --navy: #1B1E4A;
-  --navy-dark: #121435;
-  --navy-card: rgba(27, 30, 74, 0.7);
-  --navy-card-hover: rgba(33, 37, 88, 0.85);
+  --navy-deep: #11132F;
+  --navy-translucent: rgba(27, 30, 74, 0.78);
+  --navy-panel: rgba(17, 19, 47, 0.85);
 
   --stone: #AFAEA2;
-  --stone-light: #E4E3DD;
+  --stone-light: #ECEAE1;
   --stone-muted: rgba(175, 174, 162, 0.65);
   --stone-border: rgba(175, 174, 162, 0.22);
-  --stone-border-hover: rgba(175, 174, 162, 0.45);
+  --stone-border-strong: rgba(175, 174, 162, 0.45);
 
   --crimson: #D21319;
   --crimson-glow: rgba(210, 19, 25, 0.45);
-  --crimson-soft: rgba(210, 19, 25, 0.12);
-  --crimson-border: rgba(210, 19, 25, 0.4);
+  --crimson-soft: rgba(210, 19, 25, 0.14);
+  --crimson-border: rgba(210, 19, 25, 0.5);
 
   --text-white: #FFFFFF;
   --text-stone: #AFAEA2;
-  --text-light: #E8E7E0;
+  --text-light: #ECEAE1;
 
   /* Typography */
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Layout */
   --container-max: 1200px;
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
 }
 
 /* Reset & Global */
@@ -52,54 +49,72 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--navy);
-  color: var(--text-light);
+  color: var(--stone);
   font-family: var(--font-sans);
 }
 
 body {
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: 1.65;
   background-color: var(--navy);
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Soft Film-Grain Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
 }
 
-/* Serif Headings */
+/* Typography Hierarchy */
 .huge-serif {
   font-family: var(--font-serif);
   font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text-white);
-}
-
-.section-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
   letter-spacing: -1px;
   color: var(--text-white);
-  line-height: 1.1;
-  text-transform: uppercase;
 }
 
 .section-tag {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--crimson);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
+  display: inline-block;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin-bottom: 2rem;
 }
 
 .section-header {
@@ -108,26 +123,36 @@ a {
 
 .section-header.center {
   text-align: center;
-  max-width: 700px;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
 }
 
 section {
-  padding: 100px 0;
+  padding: 110px 0;
+  position: relative;
   border-bottom: 1px solid var(--stone-border);
 }
 
-/* Header & Navigation */
-header {
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: var(--navy-panel);
+  border: 1px solid var(--stone-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-md);
+}
+
+/* Floating Sticky Navbar */
+header.sticky-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  background: rgba(27, 30, 74, 0.9);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(27, 30, 74, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--stone-border);
 }
 
@@ -140,7 +165,7 @@ header {
 
 .brand-logo {
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.5px;
   color: var(--text-white);
@@ -152,16 +177,16 @@ header {
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 2.25rem;
   list-style: none;
 }
 
 .nav-link {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--stone);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  color: var(--stone);
 }
 
 .nav-link:hover {
@@ -177,16 +202,99 @@ header {
   cursor: pointer;
 }
 
+/* Scroll Progress Bar at Top */
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--crimson);
+  width: 0%;
+  z-index: 101;
+}
+
 /* ====================================================================
-   1. HERO SECTION (Prompt 2 Implementation)
-   Navy background, centre-left visual with crimson smoke/glow accents,
-   huge serif name and rotating role text on the right.
+   1. INTRO SCREEN (Film-Set / Studio Metaphor: "Rolling")
+   ==================================================================== */
+.intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #090B1E;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.intro-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.intro-slate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--crimson);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.intro-rec-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--crimson);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--crimson);
+}
+
+.intro-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--text-white);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.5rem;
+}
+
+.intro-timecode {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: var(--stone);
+  margin-bottom: 2rem;
+}
+
+.intro-skip-hint {
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  color: var(--stone-muted);
+  text-transform: uppercase;
+}
+
+/* ====================================================================
+   2. HERO SECTION
    ==================================================================== */
 .hero-section {
-  padding: 150px 0 100px;
   min-height: 100vh;
   display: flex;
   align-items: center;
+  padding: 130px 0 80px;
   background-color: var(--navy);
   position: relative;
   overflow: hidden;
@@ -199,20 +307,20 @@ header {
   gap: 3.5rem;
 }
 
-/* Centre-Left Visual with Crimson Smoke/Glow */
-.hero-visual-container {
+/* Centre-Left Visual Area */
+.hero-visual-area {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.hero-glow-smoke {
+.hero-smoke-glow {
   position: absolute;
-  width: 90%;
-  height: 90%;
+  width: 88%;
+  height: 88%;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--crimson-glow) 0%, rgba(210, 19, 25, 0.18) 45%, transparent 70%);
+  background: radial-gradient(circle, var(--crimson-glow) 0%, rgba(210, 19, 25, 0.15) 45%, transparent 70%);
   filter: blur(55px);
   z-index: 1;
   pointer-events: none;
@@ -226,80 +334,69 @@ header {
   display: block;
 }
 
-.hero-visual-img {
+.hero-cutout-img {
   width: 100%;
   height: auto;
   max-height: 560px;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.45));
 }
 
-/* Right Side: Name and Rotating Role Text */
+/* Right Content */
 .hero-content {
   position: relative;
   z-index: 3;
 }
 
-.hero-badge {
+.hero-status-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.4rem 1rem;
+  padding: 0.35rem 0.9rem;
   background: var(--crimson-soft);
   border: 1px solid var(--crimson-border);
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--stone-light);
   margin-bottom: 1.5rem;
 }
 
-.pulse-dot {
-  width: 8px;
-  height: 8px;
+.status-dot {
+  width: 7px;
+  height: 7px;
   background: var(--crimson);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--crimson);
+  box-shadow: 0 0 8px var(--crimson);
 }
 
 .hero-name {
-  font-family: var(--font-serif);
   font-size: clamp(3.2rem, 6.5vw, 5.8rem);
   line-height: 1.05;
-  font-weight: 900;
-  color: var(--text-white);
-  letter-spacing: -1.5px;
   margin-bottom: 1.25rem;
 }
 
-/* Rotating Role Text */
 .hero-role-wrapper {
-  font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
   font-weight: 500;
   color: var(--stone);
   margin-bottom: 1.5rem;
-  min-height: 2.4rem;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
 }
 
-.hero-role-rotating {
+.hero-role-text {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-style: italic;
   color: var(--text-white);
   border-bottom: 2px solid var(--crimson);
   padding-bottom: 2px;
 }
 
 .hero-tagline {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--stone-light);
-  line-height: 1.7;
-  max-width: 560px;
+  line-height: 1.75;
+  max-width: 540px;
   margin-bottom: 2.25rem;
 }
 
@@ -310,22 +407,25 @@ header {
   margin-bottom: 2.5rem;
 }
 
+/* Button Styles */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.9rem 1.8rem;
+  padding: 0.85rem 1.75rem;
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  letter-spacing: 0.5px;
   cursor: pointer;
   border: 1px solid transparent;
+  text-transform: uppercase;
 }
 
 .btn-crimson {
   background-color: var(--crimson);
   color: var(--text-white);
-  box-shadow: 0 4px 20px var(--crimson-glow);
+  box-shadow: 0 4px 18px var(--crimson-glow);
 }
 
 .btn-crimson:hover {
@@ -343,87 +443,91 @@ header {
   color: var(--text-white);
 }
 
-.hero-socials {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-icon-btn {
-  width: 44px;
-  height: 44px;
-  display: flex;
+.scroll-cue {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(175, 174, 162, 0.08);
-  border: 1px solid var(--stone-border);
-  color: var(--stone);
-  font-size: 1.1rem;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--stone-muted);
 }
 
-.social-icon-btn:hover {
-  border-color: var(--crimson);
-  color: var(--text-white);
-  background: var(--crimson-soft);
+.scroll-cue i {
+  color: var(--crimson);
 }
 
 /* ====================================================================
-   2. ABOUT SECTION
+   3. ABOUT SECTION (Darkroom Develop Metaphor)
    ==================================================================== */
-.about-card {
-  background: var(--navy-card);
-  border: 1px solid var(--stone-border);
-  border-radius: var(--radius-md);
-  padding: 3rem;
+.about-section {
+  background-color: var(--navy-deep);
 }
 
-.about-headline {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-  font-weight: 700;
-  color: var(--text-white);
-  margin-bottom: 1.75rem;
-  line-height: 1.35;
-}
-
-.about-paragraphs p {
-  font-size: 1.1rem;
-  color: var(--stone-light);
-  line-height: 1.8;
-  margin-bottom: 1.25rem;
-}
-
-.about-stats-grid {
+.about-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-  padding-top: 2.5rem;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.about-photo-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--stone-border);
+  background: var(--navy);
+}
+
+.about-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-bio {
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: var(--stone-light);
+  margin-bottom: 2.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  padding-top: 2rem;
   border-top: 1px solid var(--stone-border);
 }
 
-.stat-item {
-  text-align: center;
+.stat-card {
+  text-align: left;
 }
 
 .stat-value {
   font-family: var(--font-serif);
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 800;
   color: var(--text-white);
-  line-height: 1;
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
 }
 
 .stat-label {
-  font-size: 0.95rem;
-  color: var(--stone);
-  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--stone);
 }
 
 /* ====================================================================
-   3. WORK SECTION (Featured Projects)
+   4. WORK SECTION (Contact-Sheet Grid of Project Frames)
    ==================================================================== */
 .work-grid {
   display: grid;
@@ -431,28 +535,52 @@ header {
   gap: 2rem;
 }
 
-.work-card {
-  background: var(--navy-card);
+.work-frame {
+  background: var(--navy-panel);
   border: 1px solid var(--stone-border);
   border-radius: var(--radius-md);
-  padding: 2.25rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.work-card:hover {
-  border-color: var(--stone-border-hover);
-  background: var(--navy-card-hover);
-}
-
-.work-type {
+.work-frame-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
   font-size: 0.75rem;
-  font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+}
+
+.frame-number {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.1rem;
   color: var(--crimson);
-  margin-bottom: 0.5rem;
+}
+
+.frame-tag-film {
+  color: var(--stone-muted);
+}
+
+.work-image-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  background: var(--navy);
+  border: 1px solid var(--stone-border);
+}
+
+.work-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .work-title {
@@ -464,32 +592,11 @@ header {
   line-height: 1.3;
 }
 
-.work-description {
+.work-summary {
   font-size: 0.95rem;
   color: var(--stone-light);
+  line-height: 1.6;
   margin-bottom: 1.25rem;
-}
-
-.work-bullets {
-  list-style: none;
-  margin-bottom: 1.5rem;
-}
-
-.work-bullets li {
-  position: relative;
-  padding-left: 1.3rem;
-  font-size: 0.9rem;
-  color: var(--stone-light);
-  margin-bottom: 0.6rem;
-  line-height: 1.55;
-}
-
-.work-bullets li::before {
-  content: '▪';
-  position: absolute;
-  left: 0;
-  color: var(--crimson);
-  font-size: 1rem;
 }
 
 .work-tags {
@@ -501,7 +608,7 @@ header {
 
 .work-tag {
   font-size: 0.75rem;
-  padding: 0.25rem 0.65rem;
+  padding: 0.25rem 0.6rem;
   background: rgba(175, 174, 162, 0.08);
   border: 1px solid var(--stone-border);
   border-radius: var(--radius-sm);
@@ -510,315 +617,295 @@ header {
 
 .work-links {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.25rem;
   padding-top: 1rem;
   border-top: 1px solid var(--stone-border);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
 }
 
-.work-link {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--stone-light);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.work-link:hover {
-  color: var(--crimson);
-}
-
-/* ====================================================================
-   4. SKILLS SECTION
-   ==================================================================== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.75rem;
-}
-
-.skill-card {
-  background: var(--navy-card);
-  border: 1px solid var(--stone-border);
-  border-radius: var(--radius-md);
-  padding: 2rem;
-}
-
-.skill-category {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-white);
-  margin-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.skill-category i {
-  color: var(--crimson);
-  font-size: 1.1rem;
-}
-
-.skill-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.skill-pill {
-  font-size: 0.85rem;
-  padding: 0.4rem 0.8rem;
-  background: rgba(175, 174, 162, 0.08);
-  border: 1px solid var(--stone-border);
-  border-radius: var(--radius-sm);
-  color: var(--stone-light);
-}
-
-.skill-pill:hover {
-  border-color: var(--crimson-border);
-  color: var(--text-white);
-  background: var(--crimson-soft);
-}
-
-/* ====================================================================
-   5. CREDITS SECTION (Education, Certifications & Achievements)
-   ==================================================================== */
-.credits-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-}
-
-.credit-box {
-  background: var(--navy-card);
-  border: 1px solid var(--stone-border);
-  border-radius: var(--radius-md);
-  padding: 2.5rem;
-}
-
-.credit-box-title {
-  font-family: var(--font-serif);
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--text-white);
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.credit-box-title i {
-  color: var(--crimson);
-}
-
-.education-timeline {
-  position: relative;
-  border-left: 2px solid var(--stone-border);
-  padding-left: 1.75rem;
-}
-
-.edu-item {
-  position: relative;
-  margin-bottom: 2rem;
-}
-
-.edu-item:last-child {
-  margin-bottom: 0;
-}
-
-.edu-item::before {
-  content: '';
-  position: absolute;
-  left: -2.18rem;
-  top: 0.35rem;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--crimson);
-  border: 3px solid var(--navy);
-  box-shadow: 0 0 10px var(--crimson-glow);
-}
-
-.edu-degree {
-  font-family: var(--font-serif);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-white);
-  margin-bottom: 0.25rem;
-}
-
-.edu-school {
-  font-size: 0.95rem;
-  color: var(--stone);
-  margin-bottom: 0.25rem;
-}
-
-.edu-period {
-  font-size: 0.85rem;
+.work-link-disabled {
   color: var(--stone-muted);
-  margin-bottom: 0.5rem;
-}
-
-.edu-details {
-  font-size: 0.9rem;
-  color: var(--stone-light);
-  line-height: 1.5;
-}
-
-.cred-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.cred-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.25rem;
-  background: rgba(175, 174, 162, 0.05);
-  border: 1px solid var(--stone-border);
-  border-radius: var(--radius-sm);
-}
-
-.cred-icon {
-  font-size: 1.4rem;
-  color: var(--crimson);
-  margin-top: 0.15rem;
-}
-
-.cred-info h4 {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-white);
-  margin-bottom: 0.2rem;
-}
-
-.cred-info p {
-  font-size: 0.85rem;
-  color: var(--stone-light);
-}
-
-.cred-info .cred-date {
-  font-size: 0.75rem;
-  color: var(--crimson);
-  font-weight: 600;
-  margin-top: 0.25rem;
 }
 
 /* ====================================================================
-   6. CONTACT SECTION
+   5. SKILLS SECTION (Infinite Marquee)
    ==================================================================== */
-.contact-container {
+.skills-section {
+  background-color: var(--navy-deep);
+  overflow: hidden;
+}
+
+.skills-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.skills-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.skill-marquee-item {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--stone-light);
+  padding: 1rem 2rem;
+  background: var(--navy-panel);
+  border: 1px solid var(--stone-border);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
+
+/* ====================================================================
+   6. CREDITS SECTION (Rolling End Credits Layout)
+   ==================================================================== */
+.credits-container {
   max-width: 900px;
   margin: 0 auto;
 }
 
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2.5rem;
+.credits-block {
+  margin-bottom: 3.5rem;
 }
 
-.contact-card {
-  background: var(--navy-card);
-  border: 1px solid var(--stone-border);
-  border-radius: var(--radius-md);
-  padding: 2rem 1.5rem;
-  text-align: center;
+.credits-block-header {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--stone-border);
+}
+
+.credits-table {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1.5rem;
 }
 
-.contact-card:hover {
-  border-color: var(--crimson-border);
+.credit-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: baseline;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(175, 174, 162, 0.1);
 }
 
-.contact-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--crimson-soft);
-  border: 1px solid var(--crimson-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--crimson);
-  font-size: 1.3rem;
-  margin-bottom: 1.2rem;
-}
-
-.contact-label {
-  font-size: 0.8rem;
-  font-weight: 700;
+.credit-category {
+  font-size: 0.85rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--stone);
-  margin-bottom: 0.5rem;
 }
 
-.contact-value {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 600;
+.credit-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
   color: var(--text-white);
-  word-break: break-word;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.credit-desc {
+  font-size: 0.9rem;
+  color: var(--stone-light);
+}
+
+.credit-date {
+  font-size: 0.8rem;
+  color: var(--crimson);
+  font-weight: 600;
 }
 
 /* ====================================================================
-   7. FOOTER SECTION
+   7. CONTACT SECTION ("ON AIR")
    ==================================================================== */
-footer {
-  padding: 50px 0;
-  background-color: var(--navy-dark);
-  border-top: 1px solid var(--stone-border);
+.contact-section {
+  background-color: var(--navy-deep);
+  text-align: center;
 }
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
+.on-air-badge {
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 0.65rem;
+  padding: 0.4rem 1.1rem;
+  background: var(--crimson-soft);
+  border: 1px solid var(--crimson-border);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-white);
+  margin-bottom: 2rem;
 }
 
-.footer-brand {
+.on-air-dot {
+  width: 9px;
+  height: 9px;
+  background: var(--crimson);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--crimson);
+}
+
+.contact-headline {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  color: var(--text-white);
   font-weight: 800;
+  margin-bottom: 2.5rem;
+  line-height: 1.2;
+}
+
+.email-copy-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--navy-panel);
+  border: 1px solid var(--stone-border);
+  padding: 1rem 1.8rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+}
+
+.email-address {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   color: var(--text-white);
 }
 
-.footer-brand span {
+.btn-copy {
+  background: transparent;
+  border: 1px solid var(--stone-border);
+  color: var(--stone-light);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-copy:hover {
+  border-color: var(--crimson);
   color: var(--crimson);
 }
 
-.footer-tagline {
-  font-size: 0.9rem;
-  color: var(--stone);
-  margin-top: 0.25rem;
+.copy-feedback {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--crimson);
+  letter-spacing: 1.5px;
+  height: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-.footer-copy {
+.contact-social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-location-pill {
   font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   color: var(--stone-muted);
 }
 
 /* ====================================================================
-   RESPONSIVENESS (Mobile Stack)
+   FOOTER ("That's a wrap")
+   ==================================================================== */
+footer {
+  padding: 60px 0 40px;
+  background-color: #0B0D21;
+  border-top: 1px solid var(--stone-border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-wrap-text {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--text-white);
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: var(--stone-muted);
+}
+
+.back-to-top {
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--stone);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-to-top i {
+  color: var(--crimson);
+}
+
+.back-to-top:hover {
+  color: var(--text-white);
+}
+
+/* ====================================================================
+   RESPONSIVENESS (Mobile Stacking)
    ==================================================================== */
 @media (max-width: 900px) {
-  .credits-grid {
+  .hero-grid {
     grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .hero-visual-area {
+    order: -1;
+  }
+
+  .hero-picture {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  /* Mobile Header */
   .nav-links {
     display: none;
     flex-direction: column;
@@ -827,7 +914,7 @@ footer {
     left: 0;
     width: 100%;
     background: var(--navy);
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--stone-border);
   }
 
@@ -839,35 +926,9 @@ footer {
     display: block;
   }
 
-  /* Mobile Hero: Stack layout using hero-mobile-4x5.png */
-  .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2.5rem;
-  }
-
-  .hero-visual-container {
-    order: -1;
-  }
-
-  .hero-picture {
-    max-width: 320px;
-    margin: 0 auto;
-  }
-
-  .hero-role-wrapper {
-    justify-content: center;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .hero-socials {
-    justify-content: center;
-  }
-
-  .about-card {
-    padding: 2rem 1.5rem;
+  .email-copy-box {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
   }
 }

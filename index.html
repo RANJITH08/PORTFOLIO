@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Ranjith N - AI & Multi-Agent Systems Engineer specializing in LangGraph, RAG, and Full-Stack AI delivery.">
-  <title>RANJITH N | AI & Multi-Agent Systems Engineer</title>
+  <title>Ranjith N · Portfolio 2026</title>
+  <meta name="description" content="Cinematic portfolio of Ranjith N — Aspiring AI Engineer and Data Analyst. Building agentic architectures, RAG pipelines, and full-stack AI products.">
 
-  <!-- Google Fonts: Playfair Display (Huge Serif) & Inter (Clean Sans) -->
+  <!-- Open Graph / Twitter Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ranjith N · Portfolio 2026">
+  <meta property="og:description" content="Cinematic portfolio of Ranjith N — Aspiring AI Engineer and Data Analyst.">
+  <meta property="og:image" content="assets/hero-wide-themed.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ranjith N · Portfolio 2026">
+  <meta name="twitter:description" content="Cinematic portfolio of Ranjith N — Aspiring AI Engineer and Data Analyst.">
+  <meta name="twitter:image" content="assets/hero-wide-themed.png">
+
+  <!-- Pinned Fonts: Playfair Display (Huge Serif) & Inter / Space Grotesk (Clean Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6.5.1 (Pinned Exact Version) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Main Stylesheet -->
@@ -19,58 +29,93 @@
 </head>
 <body>
 
-  <!-- Navigation -->
-  <header>
+  <!-- Floating Sticky Navbar -->
+  <header class="sticky-nav">
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
     <div class="container navbar">
-      <a href="#hero" class="brand-logo" id="brand-logo">RANJITH N<span>.</span></a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <a href="#hero" class="brand-logo" id="brand-logo">Ranjith N<span>.</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation" aria-expanded="false">
         <i class="fas fa-bars"></i>
       </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#work" class="nav-link">Work</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#credits" class="nav-link">Credits</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#work" class="nav-link">Work</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#credits" class="nav-link">Credits</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <!-- 1. HERO SECTION -->
+  <!-- 1. INTRO (Skippable Film-Set Intro) -->
+  <div class="intro-screen" id="intro-screen" role="dialog" aria-modal="true" aria-label="Intro Screen">
+    <div class="intro-content">
+      <div class="intro-slate-badge">
+        <span class="intro-rec-dot"></span>
+        <span id="intro-label">ROLLING</span>
+      </div>
+      <h1 class="intro-title" id="intro-title">RANJITH N · PORTFOLIO 2026</h1>
+      <div class="intro-timecode" id="intro-timecode">00:00:02:18</div>
+      <p class="intro-skip-hint" id="intro-skip-hint">Click or press any key to skip</p>
+    </div>
+  </div>
+
+  <!-- 2. HERO (The Hook) -->
   <section class="hero-section" id="hero">
     <div class="container">
       <div class="hero-grid">
         <!-- Centre-Left Visual with Soft Crimson Smoke/Glow -->
-        <div class="hero-visual-container">
-          <div class="hero-glow-smoke"></div>
+        <div class="hero-visual-area">
+          <div class="hero-smoke-glow"></div>
           <picture class="hero-picture">
             <source media="(max-width: 768px)" srcset="assets/hero-mobile-4x5.png">
-            <img src="assets/me-sunglasses-cutout.png" alt="Ranjith N" class="hero-visual-img" id="hero-img">
+            <img src="assets/me-sunglasses-cutout.png" alt="Ranjith N" class="hero-cutout-img" id="hero-cutout">
           </picture>
         </div>
 
-        <!-- Right Side: Name and Rotating Role Text -->
+        <!-- Right Content: Name, Role, Tagline, CTAs -->
         <div class="hero-content">
-          <div class="hero-badge">
-            <span class="pulse-dot"></span>
-            <span id="availability-text">Open to AI / LLM Engineering roles</span>
+          <div class="hero-status-pill">
+            <span class="status-dot"></span>
+            <span id="hero-status">Available for AI Engineering</span>
           </div>
-          <h1 class="hero-name huge-serif" id="hero-name">RANJITH N</h1>
+          <h1 class="hero-name huge-serif" id="hero-name">Ranjith N</h1>
           <div class="hero-role-wrapper">
-            <span class="hero-role-rotating" id="hero-role-text">AI & Multi-Agent Systems Engineer</span>
+            <span class="hero-role-text" id="hero-role-text">AI Engineer · Data Analyst · Builder</span>
           </div>
-          <p class="hero-tagline" id="hero-tagline">
-            Building agentic, multi-agent AI systems with LangGraph, Retrieval-Augmented Generation (RAG), vector embeddings, and human-in-the-loop LLM orchestration.
-          </p>
+          <p class="hero-tagline" id="hero-tagline"></p>
           <div class="hero-actions">
             <a href="#work" class="btn btn-crimson">
               Explore Work <i class="fas fa-arrow-down"></i>
             </a>
-            <a href="assets/Ranjith_N_Resume.pdf" target="_blank" class="btn btn-outline" id="resume-btn">
+            <a href="assets/Ranjith_N_Resume.pdf" target="_blank" class="btn btn-outline" id="hero-resume-btn">
               <i class="fas fa-file-pdf"></i> Resume
             </a>
           </div>
-          <div class="hero-socials" id="hero-socials">
+          <div class="scroll-cue">
+            <i class="fas fa-chevron-down"></i> SCROLL TO EXPLORE
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ABOUT (Darkroom Develop Theme) -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" id="about-tag">ACT I · THE PROFILE</span>
+        <h2 class="section-title" id="about-title">About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-photo-wrapper">
+          <img src="assets/me-cutout-themed.png" alt="Ranjith N Portrait" class="about-photo" loading="lazy">
+        </div>
+        <div class="about-content">
+          <p class="about-bio" id="about-bio"></p>
+          <div class="stats-grid" id="about-stats">
             <!-- Dynamically populated from data.js -->
           </div>
         </div>
@@ -78,111 +123,97 @@
     </div>
   </section>
 
-  <!-- 2. ABOUT SECTION -->
-  <section id="about">
+  <!-- 4. WORK (Contact-Sheet Grid of Project Frames) -->
+  <section class="work-section" id="work">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">01 / Summary</div>
-        <h2 class="section-title">About</h2>
+        <span class="section-tag">ACT II · PRODUCTIONS</span>
+        <h2 class="section-title">Work</h2>
       </div>
-      <div class="about-card">
-        <div class="about-headline" id="about-headline"></div>
-        <div class="about-paragraphs" id="about-body"></div>
-        <div class="about-stats-grid" id="about-stats">
+      <div class="work-grid" id="work-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SKILLS (Infinite Marquee) -->
+  <section class="skills-section" id="skills">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-tag">ACT III · CAPABILITIES</span>
+        <h2 class="section-title">Skills</h2>
+      </div>
+    </div>
+    <div class="skills-marquee-container">
+      <div class="skills-marquee-track" id="skills-marquee-track">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CREDITS (Rolling End Credits) -->
+  <section class="credits-section" id="credits">
+    <div class="container credits-container">
+      <div class="section-header center">
+        <span class="section-tag" id="credits-tag">ACT IV · CREDITS</span>
+        <h2 class="section-title" id="credits-title">Credits</h2>
+      </div>
+      
+      <!-- Achievements Block -->
+      <div class="credits-block">
+        <div class="credits-block-header">ACHIEVEMENTS & HONORS</div>
+        <div class="credits-table" id="credits-achievements">
+          <!-- Dynamically populated from data.js -->
+        </div>
+      </div>
+
+      <!-- Certifications Block -->
+      <div class="credits-block">
+        <div class="credits-block-header">CERTIFICATIONS & TRAININGS</div>
+        <div class="credits-table" id="credits-certifications">
           <!-- Dynamically populated from data.js -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. WORK SECTION -->
-  <section id="work">
+  <!-- 7. CONTACT ("ON AIR" Studio Transmission) -->
+  <section class="contact-section" id="contact">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag">02 / Portfolio</div>
-        <h2 class="section-title">Work</h2>
-      </div>
-      <div class="work-grid" id="work-container">
-        <!-- Dynamically populated from data.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. SKILLS SECTION -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">03 / Expertise</div>
-        <h2 class="section-title">Skills</h2>
-      </div>
-      <div class="skills-grid" id="skills-container">
-        <!-- Dynamically populated from data.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. CREDITS SECTION -->
-  <section id="credits">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">04 / Background</div>
-        <h2 class="section-title">Credits</h2>
-      </div>
-      <div class="credits-grid">
-        <!-- Education Column -->
-        <div class="credit-box">
-          <h3 class="credit-box-title">
-            <i class="fas fa-graduation-cap"></i> Education
-          </h3>
-          <div class="education-timeline" id="education-timeline">
-            <!-- Dynamically populated from data.js -->
-          </div>
-        </div>
-
-        <!-- Certifications & Achievements Column -->
-        <div class="credit-box">
-          <h3 class="credit-box-title">
-            <i class="fas fa-award"></i> Certifications & Honors
-          </h3>
-          <div class="cred-list" id="credits-list">
-            <!-- Dynamically populated from data.js -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. CONTACT SECTION -->
-  <section id="contact">
-    <div class="container contact-container">
       <div class="section-header center">
-        <div class="section-tag">05 / Reach Out</div>
-        <h2 class="section-title" id="contact-heading">Contact</h2>
-        <p id="contact-subheading" style="color: var(--stone); margin-top: 0.75rem; font-size: 1.05rem;"></p>
+        <div class="on-air-badge">
+          <span class="on-air-dot"></span>
+          <span id="contact-badge-text">ON AIR</span>
+        </div>
+        <span class="section-tag" id="contact-tag">FINAL ACT · TRANSMISSION</span>
+        <h2 class="contact-headline" id="contact-headline">Let's build something remarkable.</h2>
       </div>
-      <div class="contact-grid" id="contact-grid">
-        <!-- Dynamically populated from data.js -->
+
+      <div class="email-copy-box">
+        <span class="email-address" id="contact-email-text">ranjith.n.work@gmail.com</span>
+        <button class="btn-copy" id="copy-email-btn" type="button">Copy Email</button>
       </div>
+      <div class="copy-feedback" id="copy-feedback"></div>
+
+      <div class="contact-social-buttons">
+        <a href="#" class="btn btn-outline" id="contact-linkedin-btn" target="_blank" rel="noopener">LinkedIn: [TODO]</a>
+        <a href="#" class="btn btn-outline" id="contact-github-btn" target="_blank" rel="noopener">GitHub: [TODO]</a>
+      </div>
+
+      <div class="contact-location-pill" id="contact-location">Tamil Nadu, India</div>
     </div>
   </section>
 
-  <!-- 7. FOOTER SECTION -->
+  <!-- FOOTER ("That's a wrap") -->
   <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div>
-          <div class="footer-brand" id="footer-brand">RANJITH N<span>.</span></div>
-          <div class="footer-tagline" id="footer-tagline">AI & Multi-Agent Systems Engineer</div>
-        </div>
-        <div class="footer-copy" id="footer-copyright">
-          © 2026 RANJITH N. All rights reserved.
-        </div>
-      </div>
+    <div class="container footer-inner">
+      <div class="footer-wrap-text" id="footer-wrap-text">THAT'S A WRAP</div>
+      <div class="footer-copy" id="footer-copyright">© 2026 RANJITH N. ALL RIGHTS RESERVED.</div>
+      <a href="#hero" class="back-to-top" id="back-to-top">Back to top <i class="fas fa-arrow-up"></i></a>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  <!-- Application Logic (ES Module) -->
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
