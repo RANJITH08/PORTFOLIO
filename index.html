@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal Portfolio - Showcase of Projects, Skills, and Experience">
-  <title>Portfolio</title>
+  <meta name="description" content="Ranjith N - AI & Multi-Agent Systems Engineer Portfolio. Specializing in LangGraph, RAG, and Full-Stack AI delivery.">
+  <title>RANJITH N | AI & Multi-Agent Systems Engineer</title>
 
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
   <!-- Navigation -->
   <header>
     <div class="container navbar">
-      <a href="#" class="brand-logo" id="brand-logo">Portfolio</a>
+      <a href="#" class="brand-logo" id="brand-logo">RANJITH N</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation">
         <i class="fas fa-bars"></i>
       </button>
@@ -31,35 +31,36 @@
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Education & Credentials</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Main Content -->
   <main>
+    <!-- Hero Section -->
     <section class="hero-section" id="hero">
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content">
             <div class="badge">
               <span class="pulse-dot"></span>
-              <span id="availability-text">Available for opportunities</span>
+              <span id="availability-text">Open to AI / LLM Engineering roles</span>
             </div>
             <h1 class="hero-title">
-              Hi, I'm <span class="gradient-text" id="hero-name">Developer</span>
+              Hi, I'm <span class="gradient-text" id="hero-name">RANJITH N</span>
             </h1>
-            <h2 class="hero-subtitle" id="hero-role">AI Engineer & Developer</h2>
+            <h2 class="hero-subtitle" id="hero-role">AI & Multi-Agent Systems Engineer</h2>
             <p class="hero-description" id="hero-tagline">
-              Building intelligent software, scalable architectures, and seamless digital experiences.
+              Building agentic, multi-agent AI systems with LangGraph, Retrieval-Augmented Generation (RAG), vector embeddings, and human-in-the-loop LLM orchestration.
             </p>
             <div class="hero-actions">
               <a href="#projects" class="btn btn-primary">
                 View Projects <i class="fas fa-arrow-right"></i>
               </a>
-              <a href="#contact" class="btn btn-secondary" id="resume-btn">
-                Contact Me
+              <a href="assets/Ranjith_N_Resume.pdf" target="_blank" class="btn btn-secondary" id="resume-btn">
+                <i class="fas fa-file-pdf"></i> Download Resume
               </a>
             </div>
             <div class="social-bar" id="social-links">
@@ -84,7 +85,7 @@
     <section id="about">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Overview</div>
+          <div class="section-tag">Summary</div>
           <h2 class="section-title">About Me</h2>
         </div>
         <div class="about-card">
@@ -101,8 +102,8 @@
     <section id="skills">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Core Competencies</div>
-          <h2 class="section-title">Skills & Technologies</h2>
+          <div class="section-tag">Expertise</div>
+          <h2 class="section-title">Technical Skills & Tools</h2>
         </div>
         <div class="skills-grid" id="skills-container">
           <!-- Dynamically populated from data.js -->
@@ -115,7 +116,7 @@
       <div class="container">
         <div class="section-header">
           <div class="section-tag">Portfolio Work</div>
-          <h2 class="section-title">Featured Projects</h2>
+          <h2 class="section-title">Featured AI Projects</h2>
         </div>
         <div class="projects-grid" id="projects-container">
           <!-- Dynamically populated from data.js -->
@@ -123,15 +124,33 @@
       </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
+    <!-- Education & Credentials Section -->
+    <section id="education">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Journey</div>
-          <h2 class="section-title">Work Experience</h2>
+          <div class="section-tag">Background</div>
+          <h2 class="section-title">Education & Credentials</h2>
         </div>
-        <div class="timeline" id="experience-timeline">
-          <!-- Dynamically populated from data.js -->
+        <div class="credentials-wrapper">
+          <!-- Education Column -->
+          <div class="credential-block">
+            <h3 class="credential-block-title">
+              <i class="fas fa-graduation-cap"></i> Education
+            </h3>
+            <div class="education-timeline" id="education-timeline">
+              <!-- Dynamically populated from data.js -->
+            </div>
+          </div>
+
+          <!-- Certifications & Achievements Column -->
+          <div class="credential-block">
+            <h3 class="credential-block-title">
+              <i class="fas fa-award"></i> Certifications & Honors
+            </h3>
+            <div class="cred-items-list" id="credentials-list">
+              <!-- Dynamically populated from data.js -->
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -139,10 +158,13 @@
     <!-- Contact Section -->
     <section id="contact">
       <div class="container">
-        <div class="contact-card">
-          <h2 id="contact-heading">Let's Connect</h2>
-          <p id="contact-subheading">Have a project or opportunity? Reach out directly.</p>
-          <a href="#" id="contact-email-btn" class="btn btn-primary">Send Email</a>
+        <div class="section-header">
+          <div class="section-tag">Get In Touch</div>
+          <h2 class="section-title" id="contact-heading">Let's Connect</h2>
+          <p id="contact-subheading" style="color: var(--text-secondary); margin-top: 0.5rem;"></p>
+        </div>
+        <div class="contact-grid" id="contact-grid">
+          <!-- Dynamically populated from data.js -->
         </div>
       </div>
     </section>
@@ -151,7 +173,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; <span id="footer-year">2026</span> <span id="footer-name">Portfolio</span>. All rights reserved.</p>
+      <p>&copy; <span id="footer-year">2026</span> <span id="footer-name">RANJITH N</span>. All rights reserved.</p>
     </div>
   </footer>
 

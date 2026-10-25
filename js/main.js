@@ -1,7 +1,7 @@
 /**
  * ====================================================================
  * MAIN APPLICATION LOGIC
- * Reads config from data.js and populates the portfolio DOM dynamically.
+ * Reads config from data.js and dynamically populates the portfolio DOM.
  * ====================================================================
  */
 
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAbout(portfolioData.about);
   initSkills(portfolioData.skills);
   initProjects(portfolioData.projects);
-  initExperience(portfolioData.experience);
+  initEducationAndCredentials(portfolioData.education, portfolioData.certifications, portfolioData.achievements);
   initContact(portfolioData.contact);
   initNavigation();
   initVisualAsset(portfolioData.assets);
@@ -51,6 +51,7 @@ function initPersonalData(personal, assets) {
   const resumeBtn = document.getElementById("resume-btn");
   if (resumeBtn && personal.resumeUrl) {
     resumeBtn.href = personal.resumeUrl;
+    resumeBtn.setAttribute("target", "_blank");
   }
 }
 
@@ -71,7 +72,7 @@ function initVisualAsset(assets) {
     modelViewer.setAttribute("loading", "lazy");
     modelViewer.className = "avatar-viewer";
 
-    // Graceful fallback to cutout image if 3D model fails or placeholder has no mesh
+    // Graceful fallback to cutout image if 3D model fails or has no mesh
     modelViewer.addEventListener("error", () => {
       console.warn("3D model failed to render, falling back to 2D cutout image.");
       renderFallbackImage(container, assets);
@@ -143,17 +144,30 @@ function initSkills(skills) {
   const container = document.getElementById("skills-container");
   if (!container || !Array.isArray(skills)) return;
 
+  const iconMap = {
+    "AI & LLM Engineering": "fa-brain",
+    "Languages": "fa-code",
+    "Frameworks & Tools": "fa-layer-group",
+    "Core Concepts": "fa-cubes",
+    "Soft Skills": "fa-users",
+    "Areas of Interest": "fa-gamepad"
+  };
+
   container.innerHTML = skills
-    .map(
-      (grp) => `
+    .map((grp) => {
+      const icon = iconMap[grp.category] || "fa-check";
+      return `
         <div class="skill-card">
-          <h3 class="skill-category">${grp.category}</h3>
+          <h3 class="skill-category">
+            <i class="fas ${icon}" style="color: var(--accent-primary);"></i>
+            ${grp.category}
+          </h3>
           <div class="skill-badges">
             ${grp.items.map((item) => `<span class="skill-pill">${item}</span>`).join("")}
           </div>
         </div>
-      `
-    )
+      `;
+    })
     .join("");
 }
 
@@ -167,15 +181,23 @@ function initProjects(projects) {
       (proj) => `
         <div class="project-card">
           <div>
+            ${proj.type ? `<span class="project-badge">${proj.type}</span>` : ""}
             <h3 class="project-title">${proj.title}</h3>
             <p class="project-description">${proj.description}</p>
+            ${
+              Array.isArray(proj.points) && proj.points.length > 0
+                ? `<ul class="project-bullets">
+                    ${proj.points.map((pt) => `<li>${pt}</li>`).join("")}
+                  </ul>`
+                : ""
+            }
             <div class="project-tags">
               ${(proj.tags || []).map((t) => `<span class="tag">${t}</span>`).join("")}
             </div>
           </div>
           <div class="project-links">
             ${proj.liveUrl ? `<a href="${proj.liveUrl}" class="project-link" target="_blank" rel="noopener">Live Demo <i class="fas fa-external-link-alt"></i></a>` : ""}
-            ${proj.githubUrl ? `<a href="${proj.githubUrl}" class="project-link" target="_blank" rel="noopener">Code <i class="fab fa-github"></i></a>` : ""}
+            ${proj.githubUrl ? `<a href="${proj.githubUrl}" class="project-link" target="_blank" rel="noopener">GitHub <i class="fab fa-github"></i></a>` : ""}
           </div>
         </div>
       `
@@ -183,23 +205,61 @@ function initProjects(projects) {
     .join("");
 }
 
-/* Experience Section */
-function initExperience(experience) {
-  const container = document.getElementById("experience-timeline");
-  if (!container || !Array.isArray(experience)) return;
+/* Education, Certifications & Achievements */
+function initEducationAndCredentials(education, certs, achievements) {
+  // Render Education
+  const eduContainer = document.getElementById("education-timeline");
+  if (eduContainer && Array.isArray(education)) {
+    eduContainer.innerHTML = education
+      .map(
+        (edu) => `
+          <div class="education-item">
+            <h3 class="edu-degree">${edu.degree}</h3>
+            <div class="edu-school">${edu.institution}</div>
+            <div class="edu-period"><i class="far fa-calendar-alt"></i> ${edu.period}</div>
+            ${edu.details ? `<p class="edu-details">${edu.details}</p>` : ""}
+          </div>
+        `
+      )
+      .join("");
+  }
 
-  container.innerHTML = experience
-    .map(
-      (exp) => `
-        <div class="timeline-item">
-          <h3 class="timeline-role">${exp.role}</h3>
-          <div class="timeline-company">${exp.company}</div>
-          <div class="timeline-period">${exp.period}</div>
-          <p class="timeline-desc">${exp.description}</p>
-        </div>
-      `
-    )
-    .join("");
+  // Render Certifications & Achievements
+  const credsContainer = document.getElementById("credentials-list");
+  if (credsContainer) {
+    let html = "";
+
+    if (Array.isArray(certs) && certs.length > 0) {
+      certs.forEach((cert) => {
+        html += `
+          <div class="cred-card">
+            <i class="${cert.icon || 'fas fa-certificate'} cred-icon"></i>
+            <div class="cred-info">
+              <h4>${cert.name}</h4>
+              <p>${cert.issuer}</p>
+              ${cert.date ? `<div class="cred-date">${cert.date}</div>` : ""}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    if (Array.isArray(achievements) && achievements.length > 0) {
+      achievements.forEach((ach) => {
+        html += `
+          <div class="cred-card">
+            <i class="${ach.icon || 'fas fa-trophy'} cred-icon" style="color: #f59e0b;"></i>
+            <div class="cred-info">
+              <h4>${ach.title}</h4>
+              <p>${ach.description}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    credsContainer.innerHTML = html;
+  }
 }
 
 /* Contact Section */
@@ -212,10 +272,30 @@ function initContact(contact) {
   const subEl = document.getElementById("contact-subheading");
   if (subEl && contact.subheading) subEl.textContent = contact.subheading;
 
-  const emailBtn = document.getElementById("contact-email-btn");
-  if (emailBtn && contact.email) {
-    emailBtn.href = `mailto:${contact.email}`;
-    emailBtn.textContent = `Get in Touch (${contact.email})`;
+  const gridEl = document.getElementById("contact-grid");
+  if (gridEl) {
+    gridEl.innerHTML = `
+      <a href="mailto:${contact.email}" class="contact-card-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val">${contact.email}</div>
+      </a>
+      <a href="tel:${contact.phone}" class="contact-card-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-val">${contact.phone}</div>
+      </a>
+      <div class="contact-card-item">
+        <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+        <div class="contact-label">Location</div>
+        <div class="contact-val">${contact.location}</div>
+      </div>
+      <a href="https://github.com/RANJITH08" target="_blank" rel="noopener" class="contact-card-item">
+        <div class="contact-icon"><i class="fab fa-github"></i></div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-val">@RANJITH08</div>
+      </a>
+    `;
   }
 }
 
